@@ -47,7 +47,7 @@ public class FlashCardBuilder {
                 FlashCard card;
                 card = getData(question, answer);
                 cardList.add(card);
-                System.out.println(cardList.get(cardList.size()-1).question);
+                System.out.println("Question: " + cardList.get(cardList.size()-1).question + " Answer: " + cardList.get(cardList.size()-1).answer);
             }
         });
 
