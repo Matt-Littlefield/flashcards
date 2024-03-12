@@ -1,11 +1,13 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.*;
 
 public class FlashCardBuilder {
     private JTextArea question;
     private JTextArea answer;
-    private ArrayList<FlashCard> cardList;
+    private ArrayList<FlashCard> cardList = new ArrayList<>();
     private JFrame frame;
 
     public FlashCardBuilder() {
@@ -39,6 +41,16 @@ public class FlashCardBuilder {
         JLabel questionLabel = new JLabel("Question");
         JLabel answerLabel = new JLabel("Answer");
 
+        nextButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FlashCard card;
+                card = getData(question, answer);
+                cardList.add(card);
+                System.out.println(cardList.get(cardList.size()-1).question);
+            }
+        });
+
         mainPanel.add(questionLabel);
         mainPanel.add(questionScroll);
         mainPanel.add(answerLabel);
@@ -48,6 +60,15 @@ public class FlashCardBuilder {
         frame.getContentPane().add(BorderLayout.CENTER,mainPanel);
         frame.setSize(450,600);
         frame.setVisible(true);
+    }
+
+    public FlashCard getData(JTextArea question, JTextArea answer) {
+        FlashCard card = new FlashCard();
+        card.question = question.getText();
+        card.answer = answer.getText();
+        question.setText("");
+        answer.setText("");
+        return card;
     }
 
     public static void main(String[] args) {
